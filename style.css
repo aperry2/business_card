@@ -1,0 +1,13 @@
+html, body {
+  background-color: black;
+  margin: 0;
+  padding: 0;
+  color: rgb(0, 255, 102);
+  justify-content: center;
+  position: absolute;
+}
+canvas {
+  display: block;
+  position: absolute;
+  z-index: -10;
+}
