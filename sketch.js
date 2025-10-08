@@ -1,12 +1,12 @@
 let rings = [
-  { text: "~* EMAIL *~", radius: 150, arcRange: 75, url: "mailto:alan.perry.studio@gmail.com", speed: -0.001, angleOffset: 0 },
-  { text: "~* WEBSITE *~", radius: 200, arcRange: 75, url: "https://www.alanjperry.com", speed: 0.0008, angleOffset: 0 },
-  { text: "~* INSTAGRAM *~", radius: 250, arcRange: 75, url: "https://www.instagram.com/alanjperry", speed: -0.0006, angleOffset: 0 }
+  { text: ".~* E-MAIL *~.", radius: 150, arcRange: 120, url: "mailto:alan.perry.studio@gmail.com", speed: 0.001, angleOffset: 0 },
+  { text: ".~* WEBSITE *~.", radius: 200, arcRange: 120, url: "https://www.alanjperry.com", speed: 0.0012, angleOffset: 0 },
+  { text: ".~* INSTAGRAM *~.", radius: 250, arcRange: 120, url: "https://www.instagram.com/alanjperry", speed: 0.0006, angleOffset: 0 }
 ];
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  textSize(24);
+  textSize(36);
   textAlign(CENTER, CENTER);
   angleMode(DEGREES); // work in degrees to simplify math
 }
@@ -16,24 +16,33 @@ function draw() {
   stroke(255);
   translate(width / 2, height / 2);
 
-  fill(255);
-  text("ALAN\nPERRY", 0, 0);
 
   // Draw each ring
   for (let i = rings.length - 1; i >= 0; i--) {
     let r = rings[i];
     push();
     fill(30);
-    noFill(); // hide the debug circles if you want
-    // circle(0, 0, r.radius * 2); // debug visualization
+    // noFill(); // hide the debug circles if you want
+    circle(0, 0, r.radius * 2 + 60); // debug visualization
 
     rotate(r.angleOffset);
     drawTextRing(r.text, r.radius, r.arcRange);
-    pop();
 
     // Animate rotation
     r.angleOffset += degrees(r.speed); // convert rad speed to deg
+    
+    pop();
   }
+
+    
+  // Draw center text
+  
+  // noStroke();
+  fill(50);
+  circle(0, 0, 260); // inner circle for aesthetics
+  fill(255);
+  text("ALAN\nPERRY", 0, 0);
+
 }
 
 // --- Draws text along an arc segment ---
