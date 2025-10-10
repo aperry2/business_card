@@ -1,7 +1,7 @@
 let rings = [
-  { text: ".~* E-MAIL *~.", radius: 150, arcRange: 120, url: "mailto:alan.perry.studio@gmail.com", speed: 0.001, angleOffset: 0 },
-  { text: ".~* WEBSITE *~.", radius: 200, arcRange: 120, url: "https://www.alanjperry.com", speed: 0.0012, angleOffset: 0 },
-  { text: ".~* INSTAGRAM *~.", radius: 250, arcRange: 120, url: "https://www.instagram.com/alanjperry", speed: 0.0006, angleOffset: 0 }
+  { text: ".~* E-MAIL *~.", radius: 200, arcRange: 120, url: "mailto:alan.perry.studio@gmail.com", speed: 0.001, angleOffset: 0 },
+  { text: ".~* WEBSITE *~.", radius: 250, arcRange: 120, url: "https://www.alanjperry.com", speed: 0.0012, angleOffset: 0 },
+  { text: ".~* INSTAGRAM *~.", radius: 300, arcRange: 120, url: "https://www.instagram.com/alanjperry", speed: 0.0006, angleOffset: 0 }
 ];
 
 function setup() {
@@ -22,8 +22,8 @@ function draw() {
     let r = rings[i];
     push();
     fill(30);
-    // noFill(); // hide the debug circles if you want
-    circle(0, 0, r.radius * 2 + 60); // debug visualization
+    // noFill(); 
+    circle(0, 0, r.radius * 2 + 60); // debug visualization (keep?)
 
     rotate(r.angleOffset);
     drawTextRing(r.text, r.radius, r.arcRange);
@@ -67,6 +67,40 @@ function drawTextRing(textString, radius, textAngleRange) {
 // --- Detect click near a specific ring and within its rotating arc ---
 function mousePressed() {
   console.log("mousePressed");
+
+  // Mouse position relative to center
+  let dx = mouseX - width / 2;
+  let dy = mouseY - height / 2;
+  let mouseDist = sqrt(dx * dx + dy * dy);
+  let mouseAngle = atan2(dy, dx); // in degrees automatically since angleMode(DEGREES)
+  // normalize angle
+  if (mouseAngle < -180) mouseAngle += 360;
+  if (mouseAngle > 180) mouseAngle -= 360;
+
+  // Check each ring
+  for (let r of rings) {
+    let ringAngle = (r.angleOffset % 360 + 360) % 360; // current rotation normalized
+    let localAngle = mouseAngle - ringAngle;
+
+    // Wrap localAngle into -180..180
+    if (localAngle > 180) localAngle -= 360;
+    if (localAngle < -180) localAngle += 360;
+
+    let minA = -r.arcRange / 2;
+    let maxA = r.arcRange / 2;
+
+    // Check if mouse within angular + radial bounds
+    if (mouseDist > r.radius - 15 && mouseDist < r.radius + 15 && localAngle > minA && localAngle < maxA) {
+      console.log("Clicked ring:", r.text, "angle:", localAngle.toFixed(1));
+      window.open(r.url, "_blank");
+      return;
+    }
+  }
+}
+
+// =-=-=-=-=-=-= Direct copy of mousePressed function above =-=-=-=-=-=-=
+function touchStarted() {
+  console.log("touchStarted");
 
   // Mouse position relative to center
   let dx = mouseX - width / 2;
