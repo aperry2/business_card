@@ -1,8 +1,9 @@
 let rings = [
   { text: ".~* E-MAIL *~.", radius: 300, arcRange: 120, url: "mailto:alan.perry.studio@gmail.com", speed: 0.001, angleOffset: 90 },
-  { text: ".~* WEBSITE *~.", radius: 350, arcRange: 120, url: "https://www.alanjperry.com", speed: 0.0012, angleOffset: 0 },
+  { text: ".~* WEBSITE *~.", radius: 350, arcRange: 120, url: "https://www.alanjperry.com", speed: -0.0012, angleOffset: 0 },
   { text: ".~* INSTAGRAM *~.", radius: 400, arcRange: 120, url: "https://www.instagram.com/alanjperry", speed: 0.0006, angleOffset: 120 },
-  { text: ".~* CURRENT CURATORIAL PROJECT *~.", radius: 450, arcRange: 180, url: "https://infinitescroll.cloud", speed: -0.002, angleOffset: 30 }
+  { text: ".~* CURRENT CURATORIAL PROJECT *~.", radius: 450, arcRange: 180, url: "https://infinitescroll.cloud", speed: -0.002, angleOffset: 30 },
+  { text: ".~* THE GROSS GLOSS - CYCLE 1 *~.", radius: 500, arcRange: 180, url: "https://infinitescroll.cloud", speed: -0.001, angleOffset: 270 }
 ];
 
 function setup() {
@@ -12,12 +13,17 @@ function setup() {
   angleMode(DEGREES); // work in degrees to simplify math
 }
 
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
+
 function draw() {
   background(0);
   stroke(255);
   translate(width / 2, height / 2);
 
 
+  textSize(36);
   // Draw each ring
   for (let i = rings.length - 1; i >= 0; i--) {
     let r = rings[i];
@@ -31,17 +37,18 @@ function draw() {
 
     // Animate rotation
     r.angleOffset += degrees(r.speed); // convert rad speed to deg
-    
+
     pop();
   }
 
-    
+
   // Draw center text
-  
+  textSize(80);
   // noStroke();
   fill(50);
-  circle(0, 0, 260); // inner circle for aesthetics
+  circle(0, 0, 500); // inner circle for aesthetics
   fill(255);
+  text("ALAN\nPERRY", 0, 0);
   text("ALAN\nPERRY", 0, 0);
 
 }
@@ -99,36 +106,18 @@ function mousePressed() {
   }
 }
 
-// =-=-=-=-=-=-= Direct copy of mousePressed function above =-=-=-=-=-=-=
+// --- Touch support for mobile ---
 function touchStarted() {
-  console.log("touchStarted");
+  if (typeof mousePressed === 'function') mousePressed();
+  return false; // prevent default scrolling
+}
 
-  // Mouse position relative to center
-  let dx = mouseX - width / 2;
-  let dy = mouseY - height / 2;
-  let mouseDist = sqrt(dx * dx + dy * dy);
-  let mouseAngle = atan2(dy, dx); // in degrees automatically since angleMode(DEGREES)
-  // normalize angle
-  if (mouseAngle < -180) mouseAngle += 360;
-  if (mouseAngle > 180) mouseAngle -= 360;
+function touchEnded() {
+  if (typeof mouseReleased === 'function') mouseReleased();
+  return false;
+}
 
-  // Check each ring
-  for (let r of rings) {
-    let ringAngle = (r.angleOffset % 360 + 360) % 360; // current rotation normalized
-    let localAngle = mouseAngle - ringAngle;
-
-    // Wrap localAngle into -180..180
-    if (localAngle > 180) localAngle -= 360;
-    if (localAngle < -180) localAngle += 360;
-
-    let minA = -r.arcRange / 2;
-    let maxA = r.arcRange / 2;
-
-    // Check if mouse within angular + radial bounds
-    if (mouseDist > r.radius - 15 && mouseDist < r.radius + 15 && localAngle > minA && localAngle < maxA) {
-      console.log("Clicked ring:", r.text, "angle:", localAngle.toFixed(1));
-      window.open(r.url, "_blank");
-      return;
-    }
-  }
+function touchMoved() {
+  if (typeof mouseDragged === 'function') mouseDragged();
+  return false;
 }
