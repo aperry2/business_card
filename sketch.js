@@ -7,29 +7,10 @@ let rings = [
 ];
 
 function setup() {
-  // create a canvas sized to the device viewport
-  const cnv = createCanvas(windowWidth, windowHeight);
+  createCanvas(windowWidth, windowHeight);
 
-  // attach the canvas to the document body (optional)
-  // cnv.parent(document.body);
-
-  // Important: limit pixel density to avoid automatic devicePixelRatio scaling
-  // Pixel density 1 makes your drawing coordinates match CSS pixels.
-  pixelDensity(1);
-
-  textSize(36);
-  textAlign(CENTER, CENTER);
-  angleMode(DEGREES); // work in degrees to simplify math
 }
 
-function windowResized() {
-  // resize the p5 drawing buffer to match new CSS size
-  resizeCanvas(windowWidth, windowHeight);
-
-  // If you calculate layout or element positions relative to the canvas,
-  // call that function here so they reflow correctly, e.g.:
-  // recalcLayout();
-}
 
 function draw() {
   background(0);
