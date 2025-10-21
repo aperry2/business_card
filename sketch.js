@@ -1,7 +1,8 @@
 let rings = [
-  { text: ".~* E-MAIL *~.", radius: 200, arcRange: 120, url: "mailto:alan.perry.studio@gmail.com", speed: 0.001, angleOffset: 0 },
-  { text: ".~* WEBSITE *~.", radius: 250, arcRange: 120, url: "https://www.alanjperry.com", speed: 0.0012, angleOffset: 0 },
-  { text: ".~* INSTAGRAM *~.", radius: 300, arcRange: 120, url: "https://www.instagram.com/alanjperry", speed: 0.0006, angleOffset: 0 }
+  { text: ".~* E-MAIL *~.", radius: 300, arcRange: 120, url: "mailto:alan.perry.studio@gmail.com", speed: 0.001, angleOffset: 90 },
+  { text: ".~* WEBSITE *~.", radius: 350, arcRange: 120, url: "https://www.alanjperry.com", speed: 0.0012, angleOffset: 0 },
+  { text: ".~* INSTAGRAM *~.", radius: 400, arcRange: 120, url: "https://www.instagram.com/alanjperry", speed: 0.0006, angleOffset: 120 },
+  { text: ".~* CURRENT CURATORIAL PROJECT *~.", radius: 450, arcRange: 180, url: "https://infinitescroll.cloud", speed: -0.002, angleOffset: 30 }
 ];
 
 function setup() {
