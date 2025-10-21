@@ -8,7 +8,8 @@ let rings = [
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-
+  angleMode(DEGREES);
+  textAlign(CENTER, CENTER);
 }
 
 
