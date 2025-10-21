@@ -2,19 +2,33 @@ let rings = [
   { text: ".~* E-MAIL *~.", radius: 300, arcRange: 120, url: "mailto:alan.perry.studio@gmail.com", speed: 0.001, angleOffset: 90 },
   { text: ".~* WEBSITE *~.", radius: 350, arcRange: 120, url: "https://www.alanjperry.com", speed: -0.0012, angleOffset: 0 },
   { text: ".~* INSTAGRAM *~.", radius: 400, arcRange: 120, url: "https://www.instagram.com/alanjperry", speed: 0.0006, angleOffset: 120 },
-  { text: ".~* CURRENT CURATORIAL PROJECT *~.", radius: 450, arcRange: 180, url: "https://infinitescroll.cloud", speed: -0.002, angleOffset: 30 },
-  { text: ".~* THE GROSS GLOSS - CYCLE 1 *~.", radius: 500, arcRange: 180, url: "https://infinitescroll.cloud", speed: -0.001, angleOffset: 270 }
+  { text: ".~* CLOUD-AS-OUROBOROS *~.", radius: 450, arcRange: 180, url: "https://infinitescroll.cloud", speed: -0.002, angleOffset: 30 },
+  { text: ".~* THE GROSS GLOSS - CYCLE 1 *~.", radius: 500, arcRange: 180, url: "https://aperry2.github.io/gross_gloss", speed: -0.001, angleOffset: 270 }
 ];
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  // create a canvas sized to the device viewport
+  const cnv = createCanvas(windowWidth, windowHeight);
+
+  // attach the canvas to the document body (optional)
+  // cnv.parent(document.body);
+
+  // Important: limit pixel density to avoid automatic devicePixelRatio scaling
+  // Pixel density 1 makes your drawing coordinates match CSS pixels.
+  pixelDensity(1);
+
   textSize(36);
   textAlign(CENTER, CENTER);
   angleMode(DEGREES); // work in degrees to simplify math
 }
 
 function windowResized() {
+  // resize the p5 drawing buffer to match new CSS size
   resizeCanvas(windowWidth, windowHeight);
+
+  // If you calculate layout or element positions relative to the canvas,
+  // call that function here so they reflow correctly, e.g.:
+  // recalcLayout();
 }
 
 function draw() {
