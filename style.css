@@ -1,57 +1,27 @@
-/* Base reset: ensure full-screen canvas and predictable layout */
 html,
 body {
   height: 100%;
   width: 100%;
+  background-color: black;
   margin: 0;
   padding: 0;
-  background-color: black;
   color: rgb(0, 255, 102);
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  /* hide tap flash on iOS */
+  -webkit-tap-highlight-color: transparent;
+  /* removes tap highlight */
   touch-action: none;
-  /* let the app handle touch gestures */
-  user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  overscroll-behavior: none;
-  /* prevent pull-to-refresh / rubber-banding gestures */
+  /* pass touches to canvas */
 }
 
-/* App root covers whole screen */
-#app-root {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  overflow: hidden;
-  z-index: 0;
-}
-
-/* Canvas: fixed, top-left, full-screen */
 canvas {
-  display: block;
   position: fixed;
+  /* stay fixed to viewport */
   top: 0;
   left: 0;
+  width: 100vw;
+  /* CSS size should be viewport size */
+  height: 100vh;
+  display: block;
   z-index: 0;
-  width: 100% !important;
-  height: 100% !important;
-  touch-action: none;
-}
-
-/* Optional debug overlay */
-#touch-debug {
-  position: fixed;
-  right: 10px;
-  top: 10px;
-  z-index: 9999;
-  color: #0f0;
-  font-family: monospace;
-  font-size: 12px;
-  background: rgba(0, 0, 0, 0.4);
-  padding: 6px 8px;
-  border-radius: 6px;
-  pointer-events: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
