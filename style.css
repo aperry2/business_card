@@ -1,27 +1,44 @@
 html,
 body {
-  height: 100%;
-  width: 100%;
-  background-color: black;
   margin: 0;
-  padding: 0;
-  color: rgb(0, 255, 102);
-  -webkit-tap-highlight-color: transparent;
-  /* removes tap highlight */
-  touch-action: none;
-  /* pass touches to canvas */
+  height: 100%;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, monospace;
+  color: #fff;
+  overflow: hidden;
+  /* full-bleed canvas */
 }
 
 canvas {
   position: fixed;
-  /* stay fixed to viewport */
-  top: 0;
-  left: 0;
-  width: 100vw;
-  /* CSS size should be viewport size */
-  height: 100vh;
-  display: block;
-  z-index: 0;
-  -webkit-user-select: none;
-  user-select: none;
+  inset: 0;
+  z-index: -1;
+  /* behind UI */
+}
+
+#links {
+  position: absolute;
+  top: 50%;
+  right: 20%;
+  /* ≈ one-fifth in from right edge */
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  /* right-justify text */
+  gap: 0.9rem;
+}
+
+#links a {
+  color: #fff;
+  text-decoration: none;
+  font-size: clamp(14px, 1.8vw, 22px);
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  opacity: 0.95;
+  transition: opacity .25s ease;
+}
+
+#links a:hover,
+#links a:focus {
+  opacity: 0.65;
 }
