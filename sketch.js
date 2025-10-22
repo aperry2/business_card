@@ -31,10 +31,12 @@ function setup() {
 }
 
 function draw() {
-  // simple animated background and a circle that follows touch/mouse
   background(18, 28, 40);
 
-  image(img, 0, 0, 0, 0);
+  let h = height;
+  let w = (img.width / img.height) * h;
+  let x = width - w;
+  image(img, x, 0, w, h);
 }
 
 function windowResized() {

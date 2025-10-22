@@ -18,7 +18,7 @@ canvas {
 #links {
   position: absolute;
   top: 50%;
-  right: 20%;
+  right: 300px;
   /* ≈ one-fifth in from right edge */
   transform: translateY(-50%);
   display: flex;
