@@ -27,7 +27,7 @@ function setup() {
   noStroke();
 
   colorA = color(5, 20, 31);
-  colorB = color(168, 255, 255);
+  colorB = color(100, 120, 120);
 }
 
 function draw() {
