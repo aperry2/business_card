@@ -60,10 +60,3 @@ function windowResized() {
   pixelDensity(dpr);
   resizeCanvas(windowWidth, windowHeight);
 }
-
-function touchStarted() {
-
-
-  // return false to stop default mobile behavior (like double-tap zoom)
-  return false;
-}
