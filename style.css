@@ -36,6 +36,7 @@ canvas {
   align-items: flex-end;
   /* right-justify text */
   gap: 0.9rem;
+  pointer-events: auto;
 }
 
 #links a {
