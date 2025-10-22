@@ -19,6 +19,7 @@ body {
 
 canvas {
   position: fixed;
+  display: block;
   inset: 0;
   z-index: -1;
   pointer-events: none;
@@ -51,7 +52,7 @@ canvas {
 
 @media (max-width: 1000px) {
   #links {
-    right: 40vw;
+    right: 45vw;
     gap: 0.6rem;
   }
 }
