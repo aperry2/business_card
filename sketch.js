@@ -1,6 +1,5 @@
 let img;
 let dpr;
-
 let colorA, colorB;
 
 function preload() {
@@ -8,60 +7,62 @@ function preload() {
 }
 
 function setup() {
-  // set reasonable pixel density for crispness without huge memory use
+  // reasonable pixel density for crispness
   dpr = Math.min(2, window.devicePixelRatio || 1);
   pixelDensity(dpr);
 
-  // create a full-window canvas
+  // create canvas and make sure it never intercepts clicks/taps
   const cnv = createCanvas(windowWidth, windowHeight);
-  // cnv.style('display', 'block');
-  // cnv.style('position', 'fixed');
-  // cnv.style('top', '0px');
-  // cnv.style('left', '0px');
+  cnv.position(0, 0);
+  cnv.style('position', 'fixed');
+  cnv.style('inset', '0');
+  cnv.style('z-index', '-1');
+  cnv.style('pointer-events', 'none'); // ← allows mobile taps to reach links
 
-  // basic page tweaks for a fullscreen app
+  // body settings for fullscreen display
   document.body.style.margin = '0';
   document.documentElement.style.height = '100%';
   document.body.style.height = '100%';
 
   noStroke();
-
   colorA = color(20, 20, 20);
   colorB = color(120, 120, 255);
 }
 
 function draw() {
-  // Get time in minutes since midnight
+  // smooth oscillating background color
   let totalMinutes = hour() * 60 + minute() + second() / 60;
-
-  // 5-minute loop phase from 0 to 1
   let phase = (totalMinutes % 5) / 5;
-
-  // Optional: make it oscillate forward and back (like a wave)
-  let eased = 0.5 * (1 - cos(TWO_PI * phase));  // smooth oscillation
-
-  // Lerp the color
+  let eased = 0.5 * (1 - cos(TWO_PI * phase));
   let bgColor = lerpColor(colorA, colorB, eased);
-
-  // Use it
   background(bgColor);
 
-  let h = height;
-  let w = (img.width / img.height) * h;
-  let x = width - w;
-  image(img, x, 0, w, h);
+  // maintain proportional scaling for background image
+  let aspect = img.width / img.height;
+  let canvasAspect = width / height;
+  let drawWidth, drawHeight;
+
+  if (canvasAspect > aspect) {
+    // canvas is wider → fit height
+    drawHeight = height;
+    drawWidth = height * aspect;
+  } else {
+    // canvas is taller → fit width
+    drawWidth = width;
+    drawHeight = width / aspect;
+  }
+
+  // draw image aligned to right edge
+  image(img, width - drawWidth, (height - drawHeight) / 2, drawWidth, drawHeight);
 }
 
 function windowResized() {
-  // update pixel density and resize canvas when the window changes (orientation, split-screen, etc.)
   dpr = Math.min(2, window.devicePixelRatio || 1);
   pixelDensity(dpr);
   resizeCanvas(windowWidth, windowHeight);
 }
 
 function touchStarted() {
-
-
-  // return false to stop default mobile behavior (like double-tap zoom)
+  // returning false prevents unwanted mobile zoom
   return false;
 }

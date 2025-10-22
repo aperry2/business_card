@@ -48,6 +48,13 @@ canvas {
   transition: opacity .25s ease;
 }
 
+@media (max-width: 600px) {
+  #links {
+    right: 6vw;
+    gap: 0.6rem;
+  }
+}
+
 #links a:hover,
 #links a:focus {
   opacity: 0.65;
