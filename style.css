@@ -1,8 +1,17 @@
+@font-face {
+  font-family: 'Cardo-Italic';
+  src: url('Cardo-Italic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
 html,
 body {
+  font-family: 'Cardo-Italic', monospace;
   margin: 0;
   height: 100%;
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, monospace;
+
   color: #fff;
   overflow: hidden;
   /* full-bleed canvas */
@@ -17,8 +26,9 @@ canvas {
 
 #links {
   position: absolute;
+  z-index: 10;
   top: 50%;
-  right: 300px;
+  right: 280px;
   /* ≈ one-fifth in from right edge */
   transform: translateY(-50%);
   display: flex;

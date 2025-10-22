@@ -14,18 +14,15 @@ function setup() {
 
   // create a full-window canvas
   const cnv = createCanvas(windowWidth, windowHeight);
-  cnv.style('display', 'block');
-  cnv.style('position', 'fixed');
-  cnv.style('top', '0px');
-  cnv.style('left', '0px');
+  // cnv.style('display', 'block');
+  // cnv.style('position', 'fixed');
+  // cnv.style('top', '0px');
+  // cnv.style('left', '0px');
 
   // basic page tweaks for a fullscreen app
   document.body.style.margin = '0';
   document.documentElement.style.height = '100%';
   document.body.style.height = '100%';
-
-  // optional: prevent the page from scrolling when interacting with the sketch
-  document.addEventListener('touchmove', (e) => e.preventDefault(), { passive: false });
 
   noStroke();
 }
