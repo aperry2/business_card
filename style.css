@@ -21,14 +21,14 @@ canvas {
   position: fixed;
   inset: 0;
   z-index: -1;
-  /* behind UI */
+  pointer-events: none;
 }
 
 #links {
   position: absolute;
   z-index: 10;
-  top: 50%;
-  right: 280px;
+  top: 30%;
+  right: 12vw;
   /* ≈ one-fifth in from right edge */
   transform: translateY(-50%);
   display: flex;

@@ -1,7 +1,7 @@
-// sketch.js - fullscreen responsive p5.js sketch for mobile & web
-
 let img;
 let dpr;
+
+let colorA, colorB;
 
 function preload() {
   img = loadImage("web_spread.png");
@@ -25,10 +25,26 @@ function setup() {
   document.body.style.height = '100%';
 
   noStroke();
+
+  colorA = color(20, 20, 20);
+  colorB = color(120, 120, 255);
 }
 
 function draw() {
-  background(18, 28, 40);
+  // Get time in minutes since midnight
+  let totalMinutes = hour() * 60 + minute() + second() / 60;
+
+  // 5-minute loop phase from 0 to 1
+  let phase = (totalMinutes % 5) / 5;
+
+  // Optional: make it oscillate forward and back (like a wave)
+  let eased = 0.5 * (1 - cos(TWO_PI * phase));  // smooth oscillation
+
+  // Lerp the color
+  let bgColor = lerpColor(colorA, colorB, eased);
+
+  // Use it
+  background(bgColor);
 
   let h = height;
   let w = (img.width / img.height) * h;
